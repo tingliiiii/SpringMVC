@@ -1,0 +1,40 @@
+# 忽略 Maven 相關文件
+target/
+
+# 忽略 IDE 相關文件
+.idea/
+*.iml
+
+# 忽略編譯生成的文件
+*.class
+
+# 忽略日誌文件
+*.log
+
+# 忽略編譯器配置文件
+*.properties
+*.properties.template
+
+# 忽略部署文件
+*.war
+*.ear
+
+# 忽略設置文件
+*.settings/
+
+# 忽略編譯的目錄
+bin/
+build/
+
+# 忽略構建產生的目錄
+target/
+
+# 忽略自動生成的文件
+.classpath
+.project
+.settings/
+.springBeans
+
+# 忽略系統文件
+.DS_Store
+Thumbs.db

@@ -1,0 +1,93 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- JSTL 標籤 -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form"%>
+
+
+<sp:form modelAttribute="user" method="post"
+	action="${ pageContext.request.contextPath }/mvc/user/${ user.id }">
+
+	<h3>User Form</h3>
+	<input id="_method" name="_method" type="hidden" value="${ _method }">
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="name" class="col-form-label">姓名</label>
+		</div>
+		<div class="col-auto">
+			<sp:input path="name" cssClass="form-control" />
+		</div>
+	</div>
+	<p></p>
+	<sp:errors path="name" cssStyle="color: red;"/>
+	<p></p>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="age" class="col-form-label">年齡</label>
+		</div>
+		<div class="col-auto">
+			<sp:input path="age" type="number" cssClass="form-control" />
+		</div>
+	</div>
+	<p></p>
+	<sp:errors path="age" cssStyle="color: red;"/>
+	<p></p>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="birth" class="col-form-label">生日</label>
+		</div>
+		<div class="col-auto">
+			<sp:input path="birth" type="date" cssClass="form-control" />
+		</div>
+	</div>
+	<p></p>
+	<sp:errors path="birth" cssStyle="color: red;"/>
+	<p></p>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="educationId" class="col-form-label">學歷</label>
+		</div>
+		<div class="col-auto">
+			<sp:select path="educationId" items="${educations}" itemValue="id"
+				itemLabel="name" cssClass="form-select"></sp:select>
+		</div>
+	</div>
+	<p></p>
+	<sp:errors path="educationId" cssStyle="color: red;"/>
+	<p></p>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">性別</div>
+		<div class="col-auto d-flex gap-3">
+			<sp:radiobuttons path="genderId" items="${ genders }" itemValue="id"
+				itemLabel="name" />
+		</div>
+	</div>
+	<p></p>
+	<sp:errors path="genderId" cssStyle="color: red;"/>
+	<p></p>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">興趣</div>
+		<div class="col-auto d-flex gap-3">
+			<sp:checkboxes path="interestIds" items="${ interests }"
+				itemValue="id" itemLabel="name" />
+		</div>
+	</div>
+	<p></p>
+	<sp:errors path="interestIds" cssStyle="color: red;"/>
+	<p></p>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">履歷</div>
+		<div class="col-auto">
+			<sp:textarea path="resume" cssClass="form-control" />
+		</div>
+	</div>
+	<p></p>
+	<sp:errors path="resume" cssStyle="color: red;"/>
+	<p></p>
+	<button type="submit" class="btn btn-primary mt-3">${ _method eq 'PUT' ? '修改' : '新增' }</button>
+	<p></p>
+	
+
+</sp:form>
