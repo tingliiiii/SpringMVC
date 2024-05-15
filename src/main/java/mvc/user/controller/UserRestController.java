@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import mvc.user.dao.BaseDataDao;
 import mvc.user.model.dto.UserDto;
+import mvc.user.model.po.Education;
+import mvc.user.model.po.Interest;
 import mvc.user.model.po.User;
 import mvc.user.model.response.ApiResponse;
 import mvc.user.service.UserService;
@@ -41,6 +44,23 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private BaseDataDao baseDataDao;
+	
+	@GetMapping("/educations")
+	public ResponseEntity<ApiResponse<List<Education>>> queryEducations() {
+		List<Education> educations = baseDataDao.findAllEducations();
+		ApiResponse apiResponse = new ApiResponse<>(true, "query education success", educations);
+		return ResponseEntity.ok(apiResponse);
+	}
+	
+	@GetMapping("/interests")
+	public ResponseEntity<ApiResponse<List<Education>>> queryInterests() {
+		List<Interest> interests = baseDataDao.findAllInterests();
+		ApiResponse apiResponse = new ApiResponse<>(true, "query education success", interests);
+		return ResponseEntity.ok(apiResponse);
+	}
+	
 	// 查詢多筆紀錄
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<UserDto>>> queryAllUsers() {

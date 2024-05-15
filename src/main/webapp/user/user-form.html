@@ -1,4 +1,66 @@
 <form id="user-form" action="">
-<h2>User Form</h2>
+	<h2>User Form</h2>
+
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="name" class="col-form-label">姓名</label>
+		</div>
+		<div class="col-auto">
+			<input type="text" id="name" name="name" class="form-control"
+				required>
+		</div>
+	</div>
+	<p></p>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="age" class="col-form-label">年齡</label>
+		</div>
+		<div class="col-auto">
+			<input type="number" id="age" name="age" class="form-control"
+				required />
+		</div>
+	</div>
+	<p></p>
+
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="birth" class="col-form-label">生日</label>
+		</div>
+		<div class="col-auto">
+			<input type="date" id="birth" name="birth" class="form-control"
+				required>
+		</div>
+	</div>
+	<p></p>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="educationId" class="col-form-label">學歷</label>
+		</div>
+		<div class="col-auto">
+			<select id="educationId" name="educationId" class="form-select" required>
+				<!-- Options will be populated dynamically -->
+			</select>
+		</div>
+	</div>
+	<p></p>
+
+	<label>性別</label> <label> <input type="radio" name="genderId"
+		value="1" required> 男
+	</label> <label> <input type="radio" name="genderId" value="2" required>
+		女
+	</label>
+	<p></p>
+
+	<label for="interestIds">興趣</label> <select id="interestIds"
+		name="interestIds" multiple required>
+		<!-- Options will be populated dynamically -->
+	</select>
+	<p></p>
+
+	<label for="resume">履歷</label>
+	<textarea id="resume" name="resume" required></textarea>
+	<p></p>
+
+	<button type="submit" class="btn btn-primary mt-3">新增</button>
 
 </form>
