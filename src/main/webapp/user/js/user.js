@@ -19,9 +19,20 @@ const loadHTML = async (url, containerId) => {
   }
 };
 
-// 資料渲染（資料所在地，目標位置，渲染方法）
-const fetchAndRenderData = async(url, containerId, renderFn) => {
+// 渲染 User 資料配置
+const renderUser = () => ``;
 
+// 資料渲染（資料所在地，目標位置，渲染方法）
+const fetchAndRenderData = async (url, containerId, renderFn) => {
+ const fullUrl = 'http://localhost:8080/SpringMVC' + url;
+	try {
+		const response = await fetch(fullUrl); // 等待 fetch 請求完成
+		const {state, message, data} = await response.json(); // 等待回應本文內容
+		console.log(state, message, data);
+	} catch(e) {
+		console.error(e);
+		$(containerId).innerHTML = '無法加載資料';
+	} 
 }
 
 // 待 DOM 加載完成之後再執行
