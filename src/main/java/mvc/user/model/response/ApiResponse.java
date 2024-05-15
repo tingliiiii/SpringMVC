@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ApiResponse<T> {
 
-	private Boolean state;
-	private String message;
-	private T data;
+	// 前後端分離的前端，回傳資料結構有統一樣式
+	private Boolean state; // 狀態
+	private String message; // 訊息
+	private T data; // 實際資料（T是任意泛型）
 }

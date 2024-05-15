@@ -55,9 +55,9 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/interests")
-	public ResponseEntity<ApiResponse<List<Education>>> queryInterests() {
+	public ResponseEntity<ApiResponse<List<Interest>>> queryInterests() {
 		List<Interest> interests = baseDataDao.findAllInterests();
-		ApiResponse apiResponse = new ApiResponse<>(true, "query education success", interests);
+		ApiResponse apiResponse = new ApiResponse<>(true, "query interest success", interests);
 		return ResponseEntity.ok(apiResponse);
 	}
 	
@@ -78,7 +78,7 @@ public class UserRestController {
 			return ResponseEntity.ok(apiResponse);
 		} catch (Exception e) {
 			e.printStackTrace();
-			ApiResponse apiResponse = new ApiResponse<>(false, e.getMessage(), null);
+			ApiResponse apiResponse = new ApiResponse<>(false, e.toString(), null);
 			return ResponseEntity.ok(apiResponse);
 		}
 	}
