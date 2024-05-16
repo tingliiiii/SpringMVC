@@ -20,7 +20,7 @@ const loadHTML = async (url, containerId) => {
 };
 
 // 渲染 User 資料配置 ========================================================================
-const renderUser = ({ id, name, gender, age, birth, education, interestNames, interests, resume }) => `
+const renderUser = ({ id, name, gender, age, birth, education, interestNames, resume }) => `
 			<tr>
 				<td>${id}</td><td>${name}</td><td>${gender.name}</td><td>${age}</td>
 				<td>${birth}</td><td>${education.name}</td><td>${interestNames}</td>
@@ -35,19 +35,18 @@ const renderUser = ({ id, name, gender, age, birth, education, interestNames, in
 
 // 資料渲染（資料所在地，目標位置，渲染方法） ======================================================
 const fetchAndRenderData = async (url, containerId, renderFn) => {
+	
 	const fullUrl = 'http://localhost:8080/SpringMVC' + url;
 	try {
 		const response = await fetch(fullUrl); // 等待 fetch 請求完成
 		const { state, message, data } = await response.json(); // 等待回應本文內容
 		console.log(state, message, data);
-		// console.log(renderFn(data[0]));
-		// console.log(renderFn(data[1]));
-		// console.log(renderFn(data[2]));
 		// $(containerId).innerHTML = renderFn(data[0])+renderFn(data[1])+renderFn(data[2]);
 		// 三元運算元：如果data是陣列，就使用 map 多筆渲染，否則單筆
 		// data.map(renderFn)：將資料陣列 data 中的每個元素都應用 renderFn 函式
+		// .join('') 將 data 陣列轉為字串（因為 .innerHTML 只吃字串資料）
+		// map 有回傳值 vs forEach 只針對內容物執行動作
 		$(containerId).innerHTML = Array.isArray(data) ? data.map(renderFn).join('') : renderFn(data);
-
 
 	} catch (e) {
 		console.error(e);
@@ -154,13 +153,14 @@ const handleFormSubmit = async (event) => {
 
 
 // 待 DOM 加載完成之後再執行 ====================================================================
+// async 是指非同步；await 是等待函數完成才進行下一個程序
 document.addEventListener("DOMContentLoaded", async () => {
 
 	// 加上 await 關鍵字等待 loadHTML 函數完成才會進行下一個程序
 	await loadHTML('/user/user-form.html', 'user-form-container');
 	await loadHTML('/user/user-list.html', 'user-list-container');
 
-	// 資料渲染（fetch取資料＋渲染）
+	// 資料渲染（fetch 取資料路徑，資料目標放置 id，渲染方法／放置邏輯）
 	fetchAndRenderData('/mvc/rest/user', 'user-list-body', renderUser);
 
 	$('user-list-table').addEventListener("click", async (event) => {
@@ -175,19 +175,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 	$('user-form').addEventListener("submit", handleFormSubmit());
 
 });
-
-/*
-$('user-list-table').addEventListener("click", async (event) => {
-  const target = event.target;
-  if (target.classList.contains('update-user-button')) {
-	const userId = target.getAttribute('data-id');
-	// 處理修改使用者
-	handleUpdateUser(userId);
-  } else if (target.classList.contains('delete-user-button')) {
-	const userId = target.getAttribute('data-id');
-	// 處理刪除使用者
-	handleDeleteUser(userId);
-  }
-});
-*/
 
