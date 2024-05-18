@@ -28,7 +28,7 @@ const handleEvent = async (event, className, callback) => {
 		return;
 	}
 	const id = event.target.getAttribute('data-id');
-	callback(id);
+	callback(id); // 返回值
 };
 
 // 資料渲染 ================================================================
@@ -178,6 +178,8 @@ const getUserData = async (id) => {
 		$('resume').value = user.resume;
 		// !important 在表單中加入一個屬性 data-id 用來記錄修改的 id 為何
 		$('user-form').setAttribute('data-id', user.id);
+		// 根據按鈕上的字判斷狀態
+		// 也有人會在按鈕上設定屬性 data-id，如1新增2修改，導引至不同邏輯
 		$('form-submit-button').textContent = '修改';
 	} catch (e) {
 		console.error(e);
@@ -245,7 +247,9 @@ const getFormData = () => {
 // 表單提交事件處理
 const handleFormSubmit = async (event) => {
 
-	event.preventDefault(); // 停止表單的預設傳送行為, 改成自訂行為, 以下是自訂行為的邏輯
+	event.preventDefault(); 
+	// 停止表單的預設傳送行為，改成自訂行為（以下是自訂行為的邏輯）
+	
 	const formData = getFormData();
 
 	const submitButtonText = $('form-submit-button').textContent;
@@ -286,4 +290,3 @@ document.addEventListener("DOMContentLoaded", async () => {
 	$('user-form').addEventListener("submit", handleFormSubmit);
 
 });
-
